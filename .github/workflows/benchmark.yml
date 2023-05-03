@@ -1,0 +1,31 @@
+name: Benchmark
+
+on:
+  schedule:
+    - cron: '0 0,6,12,18 * * *'
+  workflow_dispatch:
+
+jobs:
+
+  benchmark:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
+      - name: Run benchmarks
+        shell: bash -l {0}
+        run: |
+          gcc main.c
+          /usr/bin/time -f "%e" ./a.out 2>&1 | tee current.txt
+          git checkout HEAD^1
+          gcc main.c
+          /usr/bin/time -f "%e" ./a.out 2>&1 | tee previous.txt
+          bc <<< "scale=2; $(cat current.txt)/$(cat previous.txt)" > ratio.txt
+
+      - uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: ratio.txt
+          path: ratio.txt
