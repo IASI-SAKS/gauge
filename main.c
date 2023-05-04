@@ -1,5 +1,6 @@
 #include <stdint.h>
 #include <stdlib.h>
+#include <bsd/stdlib.h>
 
 int main (void)
 {
