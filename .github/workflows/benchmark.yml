@@ -19,10 +19,9 @@ jobs:
         run: |
           sudo apt-get install libbsd-dev
           gcc main.c -lbsd
-          gcc main.c
           /usr/bin/time -f "%e" ./a.out 2>&1 | tee current.txt
           git checkout HEAD^1
-          gcc main.c
+          gcc main.c -lbsd
           /usr/bin/time -f "%e" ./a.out 2>&1 | tee previous.txt
           bc <<< "scale=2; $(cat current.txt)/$(cat previous.txt)" > ratio.txt
 
