@@ -16,6 +16,9 @@ jobs:
           fetch-depth: 2
       - name: Gauge
         uses: ./
+        with:
+          performance_data_path: "path"
+          test_command: "./a.out"
       - uses: actions/upload-artifact@v3
         if: always()
         with:

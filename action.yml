@@ -12,9 +12,11 @@ inputs:
 runs:
   using: 'composite'
   steps:
+    - id: run-test
+      run: ${GITHUB_ACTION_PATH}/run-test.sh
+      shell: bash
+      env:
+        TEST-COMMAND: ${{ inputs.test-command }}
     - id: get-temperature
       run: ${GITHUB_ACTION_PATH}/get-temperature.sh
       shell: bash
-      env:
-        PERFORMANCE_DATA_PATH: ${{ inputs.performance-data-path }}
-        TEST-COMMAND: ${{ inputs.test-command }}
