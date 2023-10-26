@@ -16,7 +16,7 @@ jobs:
         uses: ./
         with:
           performance-data-path: "path"
-          test-command: "./a.out"
+          test-command: "ls"
       - uses: actions/upload-artifact@v3
         if: always()
         with:
