@@ -1,6 +1,13 @@
 ---
 name: 'Gauge Action'
 description: 'A simple gague'
+inputs:
+  performance-data-path:
+    description: Performance results to store after test execution
+    required: false
+  test-command:
+    description: Performance results to store after test execution
+    required: true
 
 runs:
   using: 'composite'
@@ -8,3 +15,6 @@ runs:
     - id: get-temperature
       run: ${GITHUB_ACTION_PATH}/get-temperature.sh
       shell: bash
+      env:
+        PERFORMANCE_DATA_PATH: ${{ inputs.performance-data-path }}
+        TEST-COMMAND: ${{ inputs.test-command }}
