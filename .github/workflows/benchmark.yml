@@ -15,7 +15,7 @@ jobs:
         with:
           fetch-depth: 2
       - name: Gauge
-        uses: .
+        uses: ./
       - uses: actions/upload-artifact@v2
         if: always()
         with:
