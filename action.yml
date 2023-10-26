@@ -16,7 +16,7 @@ runs:
       run: ${GITHUB_ACTION_PATH}/run-test.sh
       shell: bash
       env:
-        TEST-COMMAND: ${{ inputs.test-command }}
+        TEST_COMMAND: ${{ inputs.test-command }}
     - id: get-temperature
       run: ${GITHUB_ACTION_PATH}/get-temperature.sh
       shell: bash
