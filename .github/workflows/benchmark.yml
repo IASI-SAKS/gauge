@@ -11,12 +11,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           fetch-depth: 2
       - name: Gauge
         uses: ./
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         if: always()
         with:
           name: benchmark
