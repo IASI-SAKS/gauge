@@ -14,21 +14,11 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 2
-      - name: Run benchmarks
-        shell: bash -l {0}
-        run: |
-          sudo apt-get install libbsd-dev
-          gcc main.c -lbsd
-          /usr/bin/time -f "%e" ./a.out 2>&1 | tee current.txt
-          git checkout HEAD^1
-          gcc main.c -lbsd
-          /usr/bin/time -f "%e" ./a.out 2>&1 | tee previous.txt
-          bc <<< "scale=2; $(cat current.txt)/$(cat previous.txt)" > ratio.txt
-          date +%Y-%m-%dT%H:%m:%S > datetime.txt
-          cat datetime.txt current.txt previous.txt ratio.txt | xargs | sed 's/ /;/g' >> benchmark.csv
+      - name: Gauge
+        uses: .
       - uses: actions/upload-artifact@v2
         if: always()
         with:
           name: benchmark
           path: |
-            benchmark.csv
+            temperature.txt

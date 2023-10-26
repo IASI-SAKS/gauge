@@ -1,0 +1,10 @@
+---
+name: 'Gauge'
+description: 'A simple gague'
+
+runs:
+  using: 'composite'
+  steps:
+    - id: get-temperature
+      run: ${GITHUB_ACTION_PATH}/get-temperature.sh
+      shell: bash
