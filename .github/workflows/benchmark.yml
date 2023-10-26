@@ -1,9 +1,7 @@
 name: Benchmark
 
 on:
-  schedule:
-    - cron: '0 0,6,12,18 * * *'
-  workflow_dispatch:
+  push:
 
 jobs:
 
@@ -17,8 +15,8 @@ jobs:
       - name: Gauge
         uses: ./
         with:
-          performance_data_path: "path"
-          test_command: "./a.out"
+          performance-data-path: "path"
+          test-command: "./a.out"
       - uses: actions/upload-artifact@v3
         if: always()
         with:
